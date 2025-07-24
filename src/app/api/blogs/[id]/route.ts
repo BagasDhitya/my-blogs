@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { apiBlog } from "@/utils/api/blog.api";
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest) {
     try {
-        const { id } = params
+        const id = req.nextUrl.pathname.split("/").pop();
         const response = await apiBlog.get(`/blogs/${id}`)
         return NextResponse.json({
             data: response.data,
