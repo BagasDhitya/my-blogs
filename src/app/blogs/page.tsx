@@ -1,6 +1,8 @@
 'use client'
 import { useBlogs } from "@/helpers/useBlogs"
 import Link from "next/link"
+import Image from "next/image"
+import { Blog } from "@/utils/interface/blog"
 
 export default function Blogs() {
     const { blogs, loading, error } = useBlogs()
@@ -13,10 +15,12 @@ export default function Blogs() {
             <h1 className="text-2xl font-bold mb-4">Blog List</h1>
             <ul className="space-y-4">
                 {
-                    blogs?.data?.map((blog: any) => (
+                    blogs?.data?.map((blog: Blog ) => (
                         <li key={blog?.objectId} className="border p-4 rounded shadow">
                             <div className="w-full p-3">
-                                <img
+                                <Image
+                                    width={200}
+                                    height={200}
                                     className="object-cover h-60 w-full"
                                     src={blog.image ? blog.image : 'https://i.pinimg.com/1200x/2a/86/a5/2a86a560f0559704310d98fc32bd3d32.jpg'}
                                     alt={blog?.title}
