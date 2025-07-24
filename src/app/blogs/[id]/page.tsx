@@ -4,7 +4,7 @@ interface BlogDetailPageProps {
     params: { id: string };
 }
 export default async function BlogDetail({ params }: BlogDetailPageProps) {
-    const { id } = await params
+    const { id } = params
     const blog = await axios.get(`http://172.16.3.116:3000/api/blogs/${id}`)
     // fetching api menggunakan teknik SSR (Server Side Rendering)
     // dimana data dari api dirender terlebih dahulu oleh server, sebelum disajikan ke component
