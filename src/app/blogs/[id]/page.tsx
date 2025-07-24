@@ -1,6 +1,9 @@
 import axios from "axios";
 
-export default async function BlogDetail({ params }: { params: { id: string } }) {
+interface BlogDetailPageProps {
+    params: { id: string };
+}
+export default async function BlogDetail({ params }: BlogDetailPageProps) {
     const { id } = await params
     const blog = await axios.get(`http://172.16.3.116:3000/api/blogs/${id}`)
     // fetching api menggunakan teknik SSR (Server Side Rendering)
