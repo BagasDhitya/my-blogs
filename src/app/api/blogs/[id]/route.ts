@@ -3,7 +3,7 @@ import { apiBlog } from "@/utils/api/blog.api";
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
     try {
-        const { id } = await params
+        const { id } = params
         const response = await apiBlog.get(`/blogs/${id}`)
         return NextResponse.json({
             data: response.data,
