@@ -1,5 +1,7 @@
 import axios from "axios";
 
+export const dynamic = "force-dynamic";
+
 interface BlogDetailPageProps {
     params: { id: string };
 }
