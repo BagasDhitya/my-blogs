@@ -20,11 +20,5 @@
       "dest": "/$1",
       "continue": true
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/"
-    }
   ]
 }
