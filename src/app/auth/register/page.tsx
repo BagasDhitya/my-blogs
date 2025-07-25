@@ -2,21 +2,38 @@
 
 import { SignInInput, signInSchema } from "@/utils/validation/auth.schema";
 import { useForm } from 'react-hook-form'
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAppDispatch, useAppSelector } from "@/utils/store";
+import { signUp } from "@/utils/slices/auth.slice";
+
 import React from "react";
 
 export default function Login() {
+
+    const dispatch = useAppDispatch()
+    const router = useRouter()
+
+    const { loading, error, user } = useAppSelector((state) => state.auth)
 
     const { register, handleSubmit, formState: { errors } } = useForm<SignInInput>({
         resolver: zodResolver(signInSchema)
     })
 
-    async function handleLogin() {
+    async function handleLogin(data: SignInInput) {
+        try {
+            dispatch(signUp(data))
+            console.log('user : ', user)
+            alert(`Welcome, ${user}`)
+            // router.push('/blogs')
+        } catch (error) {
+            alert(error)
+        }
     }
 
     return (
         <main className="max-w-md mx-auto mt-20 p-6 shadow rounded">
-            <h1 className="text-2xl font-bold mb-4">Sign In</h1>
+            <h1 className="text-2xl font-bold mb-4">Register</h1>
             <form onSubmit={handleSubmit(handleLogin)} className="space-y-4">
                 <div>
                     <label htmlFor="email">Email</label>
@@ -39,7 +56,7 @@ export default function Login() {
                 <button
                     type="submit"
                     className="bg-blue-600 text-white px-4 py-2 rounded"
-                >Sign In</button>
+                >Submit</button>
             </form>
         </main>
     )
